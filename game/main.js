@@ -7,7 +7,7 @@ import { autoResize } from './core/autoResize';
 
 import { world } from './physics/world';
 import { synchronizeObjects } from './objects/synchronizeObjects';
-import { Player } from './entities/Player';
+import { Player } from './entities/Player/Player';
 
 // Le joueur
 const player = new Player(camera, rendering, world);
