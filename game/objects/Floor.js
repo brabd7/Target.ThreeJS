@@ -36,3 +36,15 @@ floorBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0);
 scene.add(floorMesh);
 world.addBody(floorBody);
 
+// Fonction pour synchroniser le sol visuel et physique
+function updateFloor()
+{   
+    // Synchroniser la position
+    floorMesh.position.copy(floorBody.position);
+
+    // Synchroniser la rotation (le quaternion)
+    floorMesh.quaternion.copy(floorBody.quaternion);
+}
+
+// Exporter le sol visuel, physique et la fonction
+export { floorMesh, floorBody, updateFloor};
