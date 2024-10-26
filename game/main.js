@@ -6,9 +6,10 @@ import { animate } from './core/animate';
 import { autoResize } from "./core/autoResize";
 
 // Physics
-import { world } from './physics/world';
+import './physics/world';
 
 // Objects
+import './objects/Floor';
 
 // Fonction animate
 animate(scene, camera, rendering);
