@@ -37,7 +37,7 @@ scene.add(floorMesh);
 world.addBody(floorBody);
 
 // Fonction pour synchroniser le sol visuel et physique
-function updateFloor()
+function synchronizeFloor()
 {   
     // Synchroniser la position
     floorMesh.position.copy(floorBody.position);
@@ -47,4 +47,4 @@ function updateFloor()
 }
 
 // Exporter le sol visuel, physique et la fonction
-export { floorMesh, floorBody, updateFloor};
+export { floorMesh, floorBody, synchronizeFloor};

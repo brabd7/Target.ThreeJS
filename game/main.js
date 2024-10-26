@@ -5,14 +5,15 @@ import { rendering } from './core/rendering';
 import { animate } from './core/animate';
 import { autoResize } from './core/autoResize';
 
-import { updateObjects } from './objects/updateObjects';
+import { world } from './physics/world';
+import { synchronizeObjects } from './objects/synchronizeObjects';
 import { Player } from './entities/Player';
 
 // Le joueur
-const player = new Player(camera, rendering);
+const player = new Player(camera, rendering, world);
 
 // Animate
-animate(scene, camera, rendering, updateObjects, player);
+animate(scene, camera, rendering, world, synchronizeObjects, player);
 
 // autoResize
 autoResize(rendering, camera);
