@@ -6,7 +6,7 @@ import { world } from '../../physics/world';
 
 // ### Partie visuelle ###
 const geometry = new THREE.BoxGeometry(50, 4, 1);
-const material = new THREE.MeshBasicMaterial();
+const material = new THREE.MeshBasicMaterial({color: '#292929'});
 const leftWallMesh = new THREE.Mesh(geometry, material);
 leftWallMesh.position.set(-8, 2, 0);
 leftWallMesh.rotation.y = Math.PI / 2;

@@ -6,7 +6,7 @@ import { world } from '../../physics/world';
 
 // ### Partie visuelle ###
 const geometry = new THREE.BoxGeometry(17, 4, 1);
-const material = new THREE.MeshBasicMaterial();
+const material = new THREE.MeshBasicMaterial({color: '#292929'});
 const backWallMesh = new THREE.Mesh(geometry, material);
 backWallMesh.position.set(0, 2, -25);
 
