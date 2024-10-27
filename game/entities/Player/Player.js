@@ -31,15 +31,13 @@ export class Player {
         world.addBody(this.playerBody);
 
         // Variables pour le mouvement
-        this.moveSpeed = 20;
+        this.moveSpeed = 15;
         this.vector3 = new THREE.Vector3();
+        this.sideVector3 = new THREE.Vector3();
         this.moveForward = false;
         this.moveBackward = false;
         this.moveRight = false;
         this.moveLeft = false;
-
-        // Mouvement du joueur
-        moveControls(this);
     }
 
     // Fonction de mise à jour du joueur pour la fonction animate
@@ -61,30 +59,46 @@ export class Player {
     // Fonction pour activer le mouvement
     move()
     {
+        // Vérifier les contrôles des mouvements du joueur
+        moveControls(this);
+        
+        // Réinitialiser la vélocité du joueur pour chaque cycle de mouvement
+        this.playerBody.velocity.set(0, this.playerBody.velocity.y, 0);
+
         // Récupérer la direction à laquelle la caméra regarde
         this.cameraControl.getDirection(this.vector3);
         
         // Ignorer la composante Y pour ne pas voler (monter en l'air)
         this.vector3.y = 0;
 
+        // Calculer la droite et la gauche en continue pour permettre au joueur d'y aller
+        // car le joueur contrôle la caméra avec sa souris et de ce fait, la droite et la gauche change tout le temps en fonction de la caméra ou elle regarde
+        // Cela s'appelle 'calculer un produit vectoriel' en fonction de deux vecteurs donnés
+        this.sideVector3.crossVectors(this.vector3, new THREE.Vector3(0, 1, 0)).normalize();
+
         // Les mouvements
         if (this.moveForward)
         {
-            this.playerBody.velocity.x = this.vector3.x * this.moveSpeed;
-            this.playerBody.velocity.z = this.vector3.z * this.moveSpeed;
+            this.playerBody.velocity.x += this.vector3.x * this.moveSpeed;
+            this.playerBody.velocity.z += this.vector3.z * this.moveSpeed;
         }
-        else if (this.moveBackward)
+        if (this.moveBackward)
         {
-            this.playerBody.velocity.x = -this.vector3.x * this.moveSpeed;
-            this.playerBody.velocity.z = -this.vector3.z * this.moveSpeed;
+            this.playerBody.velocity.x -= this.vector3.x * this.moveSpeed;
+            this.playerBody.velocity.z -= this.vector3.z * this.moveSpeed;
         }
-        else 
+        if (this.moveRight)
         {
-            this.playerBody.velocity.x = 0;
-            this.playerBody.velocity.z = 0;
+            this.playerBody.velocity.x += this.sideVector3.x * this.moveSpeed;
+            this.playerBody.velocity.z += this.sideVector3.z * this.moveSpeed;
+        }
+        if (this.moveLeft)
+        {
+            this.playerBody.velocity.x -= this.sideVector3.x * this.moveSpeed;
+            this.playerBody.velocity.z -= this.sideVector3.z * this.moveSpeed;
         }
 
         // Synchroniser la caméra avec le corps physique du joueur
-        this.camera.position.copy(this.playerBody.position);
+        this.synchronizePlayer();
     }
 }
