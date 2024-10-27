@@ -11,6 +11,8 @@ import { Player } from './entities/Player/Player';
 import { synchronizeObjects } from './objects/synchronizeObjects';
 import './objects/Walls/BackWall';
 import './objects/Walls/RightWall';
+import './objects/Walls/LeftWall.js';
+import './objects/Walls/FrontWall.js';
 
 // Le joueur
 const player = new Player(camera, rendering, world);
