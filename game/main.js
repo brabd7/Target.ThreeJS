@@ -8,6 +8,7 @@ import { autoResize } from './core/autoResize';
 import { world } from './physics/world';
 import { synchronizeObjects } from './objects/synchronizeObjects';
 import { Player } from './entities/Player/Player';
+import './objects/Walls/BackWall';
 
 // Le joueur
 const player = new Player(camera, rendering, world);
@@ -17,3 +18,4 @@ animate(scene, camera, rendering, world, synchronizeObjects, player);
 
 // autoResize
 autoResize(rendering, camera);
+

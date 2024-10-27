@@ -5,10 +5,14 @@ import { world } from '../physics/world';
 
 // ### THREE (VISUEL ) ### // 
 // Création du sol visuel
-const geometry = new THREE.PlaneGeometry(25, 25);
+const geometry = new THREE.PlaneGeometry(17, 50);
+
+// Charger une texture, un fond écran
+const textureLoader = new THREE.TextureLoader();
+const texture = textureLoader.load('../../assets/test.png');
 
 // Création du matériau du sol visuel
-const material = new THREE.MeshBasicMaterial();
+const material = new THREE.MeshBasicMaterial({map: texture});
 
 // Création du mesh (un mesh combine une géométrie et un matériau pour former un objet 3D)
 const floorMesh = new THREE.Mesh(geometry, material);
@@ -47,4 +51,4 @@ function synchronizeFloor()
 }
 
 // Exporter le sol visuel, physique et la fonction
-export { floorMesh, floorBody, synchronizeFloor};
+export { synchronizeFloor };
