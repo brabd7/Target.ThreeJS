@@ -23,7 +23,7 @@ export class Player {
         // Corps physique du joueur
         this.playerBody = new CANNON.Body({
             mass: 1,
-            position: new CANNON.Vec3(0, 10, 5),
+            position: new CANNON.Vec3(0, 1, 5),
             shape: new CANNON.Sphere(1)
         })
 
@@ -79,21 +79,25 @@ export class Player {
         // Les mouvements
         if (this.moveForward)
         {
+            this.playerBody.velocity.y = 0;
             this.playerBody.velocity.x += this.vector3.x * this.moveSpeed;
             this.playerBody.velocity.z += this.vector3.z * this.moveSpeed;
         }
         if (this.moveBackward)
         {
+            this.playerBody.velocity.y = 0;
             this.playerBody.velocity.x -= this.vector3.x * this.moveSpeed;
             this.playerBody.velocity.z -= this.vector3.z * this.moveSpeed;
         }
         if (this.moveRight)
         {
+            this.playerBody.velocity.y = 0;
             this.playerBody.velocity.x += this.sideVector3.x * this.moveSpeed;
             this.playerBody.velocity.z += this.sideVector3.z * this.moveSpeed;
         }
         if (this.moveLeft)
         {
+            this.playerBody.velocity.y = 0;
             this.playerBody.velocity.x -= this.sideVector3.x * this.moveSpeed;
             this.playerBody.velocity.z -= this.sideVector3.z * this.moveSpeed;
         }

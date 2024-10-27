@@ -6,9 +6,11 @@ import { animate } from './core/animate';
 import { autoResize } from './core/autoResize';
 
 import { world } from './physics/world';
-import { synchronizeObjects } from './objects/synchronizeObjects';
 import { Player } from './entities/Player/Player';
+
+import { synchronizeObjects } from './objects/synchronizeObjects';
 import './objects/Walls/BackWall';
+import './objects/Walls/RightWall';
 
 // Le joueur
 const player = new Player(camera, rendering, world);

@@ -12,7 +12,7 @@ backWallMesh.position.set(0, 2, -25);
 
 // ### Partie physique ###
 const backWallBody = new CANNON.Body({
-    mass: 2000,
+    mass: 0,
     position: new CANNON.Vec3(0, 2, -25)
 })
 const shape = new CANNON.Box(new CANNON.Vec3(8.5, 2, 0.5));
