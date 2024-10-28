@@ -9,7 +9,7 @@ const geometry = new THREE.PlaneGeometry(17, 50);
 
 // Charger une texture, un fond écran
 const textureLoader = new THREE.TextureLoader();
-const texture = textureLoader.load('../../assets/test.png');
+const texture = textureLoader.load('../../assets/floor.png');
 
 // Création du matériau du sol visuel
 const material = new THREE.MeshBasicMaterial({map: texture});
