@@ -15,7 +15,7 @@ const frontWallBody = new CANNON.Body({
     mass: 0,
     position: new CANNON.Vec3(0, 2, 25)
 })
-const shape = new CANNON.Box(new CANNON.Vec3(8.5, 2, 0.5));
+const shape = new CANNON.Box(new CANNON.Vec3(8.5, 100, 0.5));
 frontWallBody.addShape(shape);
 
 // L'ajouter à la scène et au monde

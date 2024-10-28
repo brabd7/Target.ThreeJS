@@ -16,7 +16,7 @@ const rightWallBody = new CANNON.Body({
     mass: 0,
     position: new CANNON.Vec3(8, 2, 0)
 })
-const shape = new CANNON.Box(new CANNON.Vec3(25, 2, 0.5));
+const shape = new CANNON.Box(new CANNON.Vec3(25, 100, 0.5));
 rightWallBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2);
 rightWallBody.addShape(shape);
 

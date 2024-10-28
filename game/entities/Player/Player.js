@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
-import { moveControls } from './controls';
+import { moveControls, jumpControl, slideControl } from './controls';
 
 export class Player {
     constructor(camera, rendering, world)
@@ -38,6 +38,12 @@ export class Player {
         this.moveBackward = false;
         this.moveRight = false;
         this.moveLeft = false;
+
+        // Variable pour le saut
+        this.isJumping = false;
+
+        // Variable pour le slide
+        this.isSliding = true;
     }
 
     // Fonction de mise à jour du joueur pour la fonction animate
@@ -46,8 +52,14 @@ export class Player {
         // Mettre à jour la caméra selon les contrôles du joueur
         this.cameraControl.update();
         
-        // Activer le mouvement
+        // Mouvement
         this.move();
+
+        // Sauter
+        this.jump();
+
+        // Slide
+        this.slide();
     }
 
     // Fonction pour synchroniser la caméra au corps du joueur
@@ -56,7 +68,7 @@ export class Player {
         this.camera.position.copy(this.playerBody.position);
     }
 
-    // Fonction pour activer le mouvement
+    // Fonction pour mouvementer le personnage
     move()
     {
         // Vérifier les contrôles des mouvements du joueur
@@ -79,30 +91,55 @@ export class Player {
         // Les mouvements
         if (this.moveForward)
         {
-            this.playerBody.velocity.y = 0;
             this.playerBody.velocity.x += this.vector3.x * this.moveSpeed;
             this.playerBody.velocity.z += this.vector3.z * this.moveSpeed;
         }
-        if (this.moveBackward)
+        if (this.moveBackward && this.playerBody.position.y <= 1)
         {
-            this.playerBody.velocity.y = 0;
             this.playerBody.velocity.x -= this.vector3.x * this.moveSpeed;
             this.playerBody.velocity.z -= this.vector3.z * this.moveSpeed;
         }
-        if (this.moveRight)
+        if (this.moveRight && this.playerBody.position.y <= 1)
         {
-            this.playerBody.velocity.y = 0;
             this.playerBody.velocity.x += this.sideVector3.x * this.moveSpeed;
             this.playerBody.velocity.z += this.sideVector3.z * this.moveSpeed;
         }
-        if (this.moveLeft)
+        if (this.moveLeft && this.playerBody.position.y <= 1)
         {
-            this.playerBody.velocity.y = 0;
             this.playerBody.velocity.x -= this.sideVector3.x * this.moveSpeed;
             this.playerBody.velocity.z -= this.sideVector3.z * this.moveSpeed;
         }
 
         // Synchroniser la caméra avec le corps physique du joueur
         this.synchronizePlayer();
+    }
+    
+    // Fonction pour sauter
+    jump()
+    {
+        // Vérifier si le contrôle du saut
+        jumpControl(this);
+
+        // S'il saute
+        if (this.isJumping)
+        {
+            // Sauter
+            this.playerBody.velocity.y = 7;
+
+            // Remettre le saut à false
+            this.isJumping = false;
+        }
+    }
+
+    // Fonction pour slide
+    slide()
+    {
+        slideControl(this);
+
+        if (this.isSliding)
+        {
+            this.playerBody.velocity.z -= 5;
+            this.isSliding = false;
+        }
     }
 }

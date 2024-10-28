@@ -1,4 +1,4 @@
-// Fonction pour les contrôles du mouvement
+// Fonction pour les contrôles des différentes possibilités du joueur
 export function moveControls(player)
 {
     // Touche enfoncée
@@ -44,3 +44,25 @@ export function moveControls(player)
     })
 }
 
+export function jumpControl(player)
+{
+    document.addEventListener('keyup', (event) => {
+        if (event.code == "Space")
+        {
+            if (player.isJumping == false && player.playerBody.position.y <= 1)
+            {
+                player.isJumping = true;
+            }
+        }
+    })
+}
+
+export function slideControl(player)
+{
+    document.addEventListener('keydown', (event) => {
+        if (event.code == "KeyC" && player.playerBody.position.y <= 1 && !player.isSliding) 
+        {
+            player.isSliding = true;
+        }
+    })
+}
